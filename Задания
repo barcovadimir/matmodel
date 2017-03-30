@@ -1,0 +1,183 @@
+## Задание 1
+iris
+zan1= list(mean(iris$Sepal.Length), mean(iris$Sepal.Width),mean(iris$Petal.Length),mean(iris$Petal.Width)) zan1
+names(zan1)= c("Длинна чашелистника","Ширина чашелистиков","Длинна лепестков", "Ширина лепестков")
+zan1
+## Задание 2
+mode(zan1)
+iris
+z=iris
+z
+z$Species=NULL
+z
+z[1,1:4]
+sum(z[1,1:4])
+sum(z[1,1:4])/4
+y=0
+for(i in 1:150)
+  + {x=sum(z[i,1:4])/4
+  + y=c(x,y)}
+y
+##Задание 3
+DNA= c("A","C","G","T")
+DNA = sample(DNA, size = 1000, replace = T); DNA
+DAN = factor(DNA)
+DNA
+DNA = factor(DNA)
+DNA
+summary(DNA)
+length(DNA)
+DNA_AT=c(summary(DNA))
+DNA_AT=DNA_AT[c("A","T")]
+DAN_AT
+DNA_AT=DNA_AT[c("A","T")]
+DNA_AT
+y=DNA_AT/1000
+y
+DNA_AT=c(DNA_AT, y)
+DNA_AT
+## Задание 5
+iris
+x=iris
+x$Sepal.Length=NULL
+x$Sepal.Width=NULL
+x$Petal.Width=NULL
+x[1: 50, 1]
+mean(x[1: 50, 1])
+setosa=mean(x[1: 50, 1])
+setosa
+versicolor=mean(x[51:100, 1])
+versicolor
+virginica=mean(x[101:150, 1])
+virginica
+spec=c(setosa,versicolor,virginica)
+spec
+names(spec)=c("setosa","versicolor","virginica")
+spec
+sort(spec)
+levels(iris$Species)=names(sort(tapply(iris$Petal.Length, iris$Species, mean)))
+names(sort(tapply(iris$Petal.Length, iris$Species, mean)))
+## Задание 6
+x=c(21,34,-1,-10,0,38,19,2,-13)
+median(x)
+x=sort(x)
+x
+med= function(p)
+{sort(p)
+  return(p[round((length(p)+1)/2)])}
+med(x)
+##Задание 7
+library(ggplot2)
+ggplot(iris,aes(x=Petal.Length,y=Sepal.Length, col= Species)) + geom_point(alpha=0.4)
+## Задание 8
+> tapply(diamonds$price[diamonds$price>1000],diamonds$clarity[diamonds$price>1000],mean)
+> diamonds
+##задание 9
+spirman <- функция(х, Г) {
+
+если(длина(х)==Длина(м) && это.вектор(х)==истина && это.вектор(г)==правда){
+
+п=1
+
+н=длина(х)
+
+ГХ=ранг(х)
+
+ры=ранг(г)
+
+для(я в 1:н)
+
+{
+
+п = п - ((( ГХ[я] - ры[я] )^2)*6)/(Н*(Н^2-1))
+
+}
+
+}
+
+еще{
+
+если(это.вектор(х)==истина && это.вектор(г)==истина)
+
+печати("Ошибка. Вектора должны быть одинаковой длины")
+
+еще
+
+печати("Ошибка.Входные данные должны быть векторами")
+
+п=-1
+
+}
+
+возвращение(п)
+
+}
+
+spirman(ирис$Чашелистик.Длина,ирис$лепесток.Длина)
+##ЗАДАНИЕ 10
+tbl = tbl %>% mutate_if(is.character, factor) 
+
+names(tbl) = names(tbl) %>% 
+  str_replace_all("[!]", "_emph_") %>% 
+  str_replace_all("[?]", "_quest_") %>% 
+  str_replace_all("[*]", "_star_") %>% 
+  str_replace_all("[+]", "_plus_") %>% 
+  str_replace_all("[-]", "_minus_") %>% 
+  str_replace_all("[@]", "_at_") %>% 
+  str_replace_all("[$]", "_dollar_") %>% 
+  str_replace_all("[#]", "_hash_") %>% 
+  str_replace_all("[/]", "_div_") %>% 
+  str_replace_all("[%]", "_perc_") %>% 
+  str_replace_all("[&]", "_amp_") %>% 
+  str_replace_all("[\\^]", "_power_") %>% 
+  str_replace_all("[()]", "_") 
+
+
+tbl_numeric = tbl[, sapply(tbl, is.numeric)] 
+
+tbl_numeric[tbl_numeric == -9999] <- NA 
+
+
+summer <- 
+  tbl_numeric[tbl_numeric$DOY >= 152 & tbl_numeric$DOY <= 244,] 
+
+summer <- summer[, c(-2, -3)] 
+
+
+cor_td = cor(drop_na(tbl_numeric)) %>% as.data.frame %>% select(co2_flux) 
+vars = row.names(cor_td)[cor_td$co2_flux ^ 2 > .1] %>% na.exclude 
+
+vars 
+
+
+model1 <- 
+  lm( 
+    co2_flux ~ air_temperature + h2o_flux + Tau + RH + VPD + H + LE, 
+    data = summer 
+  ) 
+
+summary(model1) 
+confint(model1, level = 0.95) 
+anova(model1) 
+plot(model1) 
+
+
+corFrame = data.frame( 
+  LE = summer$LE, 
+  air_temperature = summer$air_temperature, 
+  h2o_flux = summer$h2o_flux, 
+  Tau = summer$Tau, 
+  RH = summer$RH, 
+  VPD = summer$VPD, 
+  H = summer$H 
+) 
+cor(corFrame, use = "na.or.complete") 
+
+
+model2 <- lm(co2_flux ~ air_temperature + h2o_flux + RH + H, data = summer) 
+summary(model2) 
+confint(model2, level = 0.95) 
+anova(model2) 
+plot(model2) 
+
+anova(model1, model2)
